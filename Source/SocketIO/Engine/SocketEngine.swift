@@ -563,7 +563,9 @@ open class SocketEngine: NSObject, WebSocketDelegate, URLSessionDelegate,
         polling = true
         probing = false
         invalidated = false
-        session = Foundation.URLSession(configuration: .default, delegate: sessionDelegate, delegateQueue: queue)
+        let configuration = URLSessionConfiguration.default
+        configuration.timeoutIntervalForRequest = 20
+        session = Foundation.URLSession(configuration: configuration, delegate: sessionDelegate, delegateQueue: queue)
         sid = ""
         waitingForPoll = false
         waitingForPost = false
